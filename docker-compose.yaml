@@ -1,0 +1,62 @@
+version: '3'
+services:
+  web:
+    build:
+      context: .
+    command: [
+      "bash", "-c",
+      "./manage.py migrate && ./manage.py runserver 0.0.0.0:8000"
+    ]
+    ports:
+      - "8000:8000"
+    working_dir: /app
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - ./:/app
+
+  redis:
+    image: redis:5.0
+    volumes:
+      - redis-data:/data
+
+  db:
+    image: postgres:11.1
+    env_file:
+      - .env
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  celery-worker:
+    build:
+      context: .
+    working_dir: /app
+    command: "celery -A adverts worker -l info"
+    env_file:
+      - .env
+    depends_on:
+      - redis
+      - db
+    volumes:
+      - ./:/app
+
+  celery-beat:
+    build:
+      context: .
+    working_dir: /app
+    command: "celery beat -A adverts -l info --pidfile="
+    env_file:
+      - .env
+    depends_on:
+      - redis
+      - db
+    volumes:
+      - ./:/app
+
+
+volumes:
+  db-data: {}
+  redis-data: {}

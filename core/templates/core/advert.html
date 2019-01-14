@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block body %}
+  <h2>{{ advert.title }}</h2>
+  <p>{{ advert.description }}</p>
+  <p>{{ advert.city.name }}</p>
+  <p>{{ advert.user.username }}</p>
+  <p>views: {{ advert.views_count }}</p>
+{% endblock %}

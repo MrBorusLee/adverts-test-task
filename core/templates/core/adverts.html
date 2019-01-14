@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block body %}
+  {% for advert in adverts %}
+    <h3><a href="{% url 'advert' advert.pk %}">{{ advert.title }}</a></h3>
+    <p>{{ advert.description }}</p>
+    <p>{{ advert.city.name }}</p>
+    <p>{{ advert.user.username }}</p>
+    <p>{{ advert.views_count }}</p>
+    {% if not forloop.last %}
+      <hr>
+    {% endif %}
+  {% endfor %}
+{% endblock %}
