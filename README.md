@@ -1,4 +1,4 @@
-# Quiz project
+# Adverts project
 Abstract adverts application with views count which implemented using redis set.  
 Project contains:
 - Django backend
