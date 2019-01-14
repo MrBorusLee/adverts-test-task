@@ -14,7 +14,7 @@ Project contains:
 ## Installation
 Before you start, make sure that you have [Docker](https://www.docker.com/) and [Docker-Compose](https://docs.docker.com/compose/) installed on your machine  
 `make dev`  
-It will run two development server at [http://127.0.0.1:8000](http://127.0.0.1:8000)
+It will run development server at [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
 ## Testing
 To fill database with fake data use (while container is running)  
